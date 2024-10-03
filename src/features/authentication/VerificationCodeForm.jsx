@@ -34,8 +34,10 @@ const ValidityTimeSection = styled.p`
 const ResendCodeButton = styled.button`
     margin-top: 16px;
     border: none;
-    background-color: #0f1fd1;
-    color: #fdfeff;
+    /* background-color: #0f1fd1; */
+    background-color: transparent;
+    border: 1px solid #0f1fd1;
+    color: #0f1fd1;
     border-radius: 8px;
     padding: 12px 16px;
 `;
