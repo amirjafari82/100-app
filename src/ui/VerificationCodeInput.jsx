@@ -7,10 +7,15 @@ const Input = styled.input`
     text-align: center;
     font-family: "Poppins";
     font-weight: 600;
-    background-color: #e7e8fa;
+    background-color: #ffffff;
     border: 1px solid #0f1fd1;
     border-radius: 8px;
     outline: none;
+    transition: all 0.6s ease;
+
+    &.filled {
+        background-color: #e7e8fa;
+    }
 `;
 
 const StyledInputContainer = styled.div`
@@ -35,6 +40,7 @@ function VerificationCodeInput({ length, setUserInput }) {
         });
         if (!code[name]) {
             const nextElName = Number(name) + 1;
+            document.getElementById(name).className += " filled";
             if (nextElName <= length - 1)
                 document.getElementById(nextElName).focus();
         }

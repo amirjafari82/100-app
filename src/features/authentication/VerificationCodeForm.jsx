@@ -58,8 +58,6 @@ function VerificationCodeForm() {
     const navigate = useNavigate();
     console.log(code);
 
-    console.log(userInput === code);
-
     function handleResendCode(e) {
         e.preventDefault();
         setCode(getRandomCode(99999));
