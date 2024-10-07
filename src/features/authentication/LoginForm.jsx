@@ -2,8 +2,9 @@ import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import styled from "styled-components";
 import { useLogin } from "../../context/LoginContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./useUser";
 
 const StyledForm = styled.form`
     display: flex;
@@ -24,6 +25,14 @@ function LoginForm() {
     const { phone, setPhone } = useLogin();
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { isLoading, isAuthenticated } = useUser();
+
+    useEffect(
+        function () {
+            if (isAuthenticated && !isLoading) navigate("/account");
+        },
+        [navigate, isAuthenticated, isLoading]
+    );
 
     function handleSubmit(e) {
         e.preventDefault();

@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import ShowImages from "../features/onboarding/showImages";
+import { useUser } from "../features/authentication/useUser";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -44,6 +47,15 @@ const StyledCircleLarge = styled.div`
 `;
 
 function OnboardingElipse({ index }) {
+    const { isLoading: isLoadingUser, isAuthenticated } = useUser();
+    const navigate = useNavigate();
+
+    useEffect(
+        function () {
+            if (isAuthenticated && !isLoadingUser) navigate("/account");
+        },
+        [navigate, isAuthenticated, isLoadingUser]
+    );
     return (
         <Container>
             <StyledCircles>

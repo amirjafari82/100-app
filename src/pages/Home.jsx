@@ -1,9 +1,9 @@
-import ShowUsers from "../features/users/ShowUsers";
+import ShowUser from "../features/users/ShowUser";
 
 function Home() {
     return (
         <div>
-            Hi Zahra
+            <ShowUser />
         </div>
     );
 }

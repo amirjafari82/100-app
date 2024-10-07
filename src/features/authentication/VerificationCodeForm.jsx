@@ -1,14 +1,15 @@
-import styled from "styled-components";
-import VerificationCodeInput from "../../ui/VerificationCodeInput";
-import Button from "../../ui/Button";
-import { getRandomCode } from "../../utils/utils";
-import CountDownTimer from "../../ui/CountDownTimer";
-import { useState } from "react";
-import { useCode } from "./useCode";
+import { useEffect, useState } from "react";
 import { AiTwotoneEdit } from "react-icons/ai";
-import { useLogin } from "../../context/LoginContext";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import styled from "styled-components";
+import { useLogin as usePhone } from "../../context/LoginContext";
+import Button from "../../ui/Button";
+import CountDownTimer from "../../ui/CountDownTimer";
+import VerificationCodeInput from "../../ui/VerificationCodeInput";
+import { getRandomCode } from "../../utils/utils";
+import { useCode } from "./useCode";
+import { useLogin } from "./useLogin";
+import { useUser } from "./useUser";
 
 const StyledForm = styled.form`
     display: flex;
@@ -50,25 +51,35 @@ const EditPhone = styled.div`
 `;
 
 function VerificationCodeForm() {
-    const { phone } = useLogin();
-    const { setIsAuthenticated } = useAuth();
+    const { phone } = usePhone();
     const [userInput, setUserInput] = useState();
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const { code, setCode } = useCode();
     const navigate = useNavigate();
     console.log(code);
 
+    const { isLoading: isLoadingUser, isAuthenticated } = useUser();
+
+    useEffect(
+        function () {
+            if (isAuthenticated && !isLoadingUser) navigate("/account");
+        },
+        [navigate, isAuthenticated, isLoadingUser]
+    );
+
+    const { login, isLoading } = useLogin();
+
     function handleResendCode(e) {
         e.preventDefault();
-        setCode(getRandomCode(99999));
+        setCode(getRandomCode(10000, 99999));
         setIsTimerFinished(false);
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         if (userInput === code) {
-            setIsAuthenticated(true);
-            navigate("/account");
+            const data = await login(phone);
+            console.log(data);
         }
     }
 
@@ -96,7 +107,9 @@ function VerificationCodeForm() {
                     </ValidityTimeSection>
                 )}
             </StyledTopForm>
-            <Button>Enter</Button>
+            <Button disabled={isLoading}>
+                {!isLoading ? "Enter" : "Logging in"}
+            </Button>
         </StyledForm>
     );
 }

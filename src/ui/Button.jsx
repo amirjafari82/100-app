@@ -11,8 +11,8 @@ const StyledButton = styled.button`
     padding: 12px 0px;
 `;
 
-function Button({ children, onClick }) {
-    return <StyledButton onClick={onClick}>{children}</StyledButton>;
+function Button({ children, onClick, disabled }) {
+    return <StyledButton onClick={onClick} disabled={disabled}>{children}</StyledButton>;
 }
 
 export default Button;

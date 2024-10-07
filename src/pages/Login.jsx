@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import Logo from "../ui/Logo";
-import LoginTitle from "../ui/LoginTitle";
-import LoginForm from "../features/authentication/LoginForm";
 import { LoginProvider } from "../context/LoginContext";
-import VerificationTitle from "../ui/VerificationTitle";
+import LoginForm from "../features/authentication/LoginForm";
 import VerificationCodeForm from "../features/authentication/VerificationCodeForm";
-import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import LoginTitle from "../ui/LoginTitle";
+import Logo from "../ui/Logo";
+import VerificationTitle from "../ui/VerificationTitle";
 
 export const Container = styled.div`
     display: flex;
@@ -17,15 +14,6 @@ export const Container = styled.div`
 `;
 
 function Login({ page }) {
-    const { isAuthenticated } = useAuth();
-    const navigate = useNavigate();
-
-    useEffect(
-        function () {
-            if (isAuthenticated) navigate("/account");
-        },
-        [navigate, isAuthenticated]
-    );
 
     return (
         <LoginProvider>
