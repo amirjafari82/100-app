@@ -6,15 +6,15 @@ export function useLogin() {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { mutate: login, isLoading } = useMutation({
+    const { mutate: login, isPending } = useMutation({
         mutationFn: (phone) => loginApi(phone),
         onSuccess: (data) => {
             console.log(data);
             queryClient.setQueryData(["user"], data.data);
-            navigate("/account", { replace: true });
+            navigate("/services", { replace: true });
         },
         onError: (err) => console.log(err),
     });
 
-    return { login, isLoading };
+    return { login, isPending };
 }

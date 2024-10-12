@@ -52,7 +52,7 @@ function OnboardingElipse({ index }) {
 
     useEffect(
         function () {
-            if (isAuthenticated && !isLoadingUser) navigate("/account");
+            if (isAuthenticated && !isLoadingUser) navigate("/services");
         },
         [navigate, isAuthenticated, isLoadingUser]
     );

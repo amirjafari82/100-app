@@ -1,6 +1,8 @@
-import { HiArrowRight, HiCheck } from "react-icons/hi";
-import { redirect, useNavigate } from "react-router-dom";
+import { HiCheck } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import ArrowRight from "../icons/ArrowRight";
+import Check from "../icons/Check";
 
 const Div1 = styled.div`
     border-radius: 100%;
@@ -10,6 +12,9 @@ const Div1 = styled.div`
     border-spacing: 10px;
     z-index: 10;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0;
 `;
 
@@ -20,22 +25,12 @@ const Container = styled.div`
     align-items: center;
     margin-top: 64px;
     margin-bottom: 54px;
+    cursor: pointer;
 `;
 
-const HiArrowRight2 = styled(HiArrowRight)`
-    z-index: 10;
-    width: 24px !important;
-    height: 24px !important;
-    color: #fff;
-    margin-top: 18px;
-`;
-
-const HiCheck2 = styled(HiCheck)`
-    z-index: 10;
-    width: 24px !important;
-    height: 24px !important;
-    color: #fff;
-    margin-top: 18px;
+const Icon = styled.div`
+    z-index: 100;
+    margin-top: 4px;
 `;
 
 function OnboardingNextButton({ setIndex, index }) {
@@ -47,8 +42,17 @@ function OnboardingNextButton({ setIndex, index }) {
                 index !== 2 ? setIndex((i) => i + 1) : navigate("/login");
             }}
         >
-            <Div1></Div1>
-            {index !== 2 ? <HiArrowRight2 /> : <HiCheck2 />}
+            <Div1>
+                {index !== 2 ? (
+                    <Icon>
+                        <ArrowRight />
+                    </Icon>
+                ) : (
+                    <Icon>
+                        <Check />
+                    </Icon>
+                )}
+            </Div1>
         </Container>
     );
 }

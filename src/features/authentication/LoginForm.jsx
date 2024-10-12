@@ -5,6 +5,7 @@ import { useLogin } from "../../context/LoginContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./useUser";
+import { getRandomCode } from "../../utils/utils";
 
 const StyledForm = styled.form`
     display: flex;
@@ -21,7 +22,7 @@ const Error = styled.p`
     top: 60px;
 `;
 
-function LoginForm() {
+function LoginForm({ code, setCode }) {
     const { phone, setPhone } = useLogin();
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function LoginForm() {
 
     useEffect(
         function () {
-            if (isAuthenticated && !isLoading) navigate("/account");
+            if (isAuthenticated && !isLoading) navigate("/services");
         },
         [navigate, isAuthenticated, isLoading]
     );
@@ -41,13 +42,18 @@ function LoginForm() {
         } else {
             setError("");
             setPhone(phone);
+            setCode(getRandomCode(10000, 99999));
             navigate("/login/verification");
         }
     }
 
     return (
         <StyledForm onSubmit={handleSubmit}>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <Input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                isError={error === "" ? false : true}
+            />
             {error && <Error>{error}</Error>}
             <Button>Continue</Button>
         </StyledForm>

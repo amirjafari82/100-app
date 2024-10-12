@@ -1,16 +1,16 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "../features/authentication/useUser";
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate();
-    const { isLoading, isAuthenticated } = useUser();
+    const { isPending, isAuthenticated } = useUser();
 
     useEffect(
         function () {
-            if (!isAuthenticated && !isLoading) navigate("/login");
+            if (!isAuthenticated && !isPending) navigate("/login");
         },
-        [navigate, isAuthenticated, isLoading]
+        [navigate, isAuthenticated, isPending]
     );
 
     if (isAuthenticated) return children;

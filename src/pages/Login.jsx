@@ -3,8 +3,9 @@ import { LoginProvider } from "../context/LoginContext";
 import LoginForm from "../features/authentication/LoginForm";
 import VerificationCodeForm from "../features/authentication/VerificationCodeForm";
 import LoginTitle from "../ui/LoginTitle";
-import Logo from "../ui/Logo";
 import VerificationTitle from "../ui/VerificationTitle";
+import { useCode } from "../features/authentication/useCode";
+import Logo from "../icons/Logo";
 
 export const Container = styled.div`
     display: flex;
@@ -14,6 +15,7 @@ export const Container = styled.div`
 `;
 
 function Login({ page }) {
+    const { code, setCode } = useCode();
 
     return (
         <LoginProvider>
@@ -22,13 +24,17 @@ function Login({ page }) {
                     <>
                         <Logo />
                         <LoginTitle />
-                        <LoginForm />
+                        <LoginForm code={code} setCode={setCode} />
                     </>
                 ) : (
                     <>
                         <Logo />
                         <VerificationTitle />
-                        <VerificationCodeForm length={5} />
+                        <VerificationCodeForm
+                            length={5}
+                            code={code}
+                            setCode={setCode}
+                        />
                     </>
                 )}
             </Container>

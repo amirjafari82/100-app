@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Input = styled.input`
     width: 66px;
@@ -11,11 +11,18 @@ const Input = styled.input`
     border: 1px solid #0f1fd1;
     border-radius: 8px;
     outline: none;
-    transition: all 0.6s ease;
+    transition: all 0.3s ease;
 
     &.filled {
         background-color: #e7e8fa;
     }
+
+    ${(props) =>
+        props.isError &&
+        css`
+            border: 1px solid #ff3f32;
+            background-color: #e7e8fa;
+        `}
 `;
 
 const StyledInputContainer = styled.div`
@@ -23,7 +30,7 @@ const StyledInputContainer = styled.div`
     gap: 16px;
 `;
 
-function VerificationCodeInput({ length, setUserInput }) {
+function VerificationCodeInput({ length, setUserInput, isError }) {
     const inputNumbers = Array.from({ length: length }, (x, i) => i);
     const initialStateArray = inputNumbers.map(function (input) {
         return {
@@ -71,6 +78,7 @@ function VerificationCodeInput({ length, setUserInput }) {
                     value={code[input]}
                     onChange={handleChange}
                     key={input}
+                    isError={isError}
                 />
             ))}
         </StyledInputContainer>

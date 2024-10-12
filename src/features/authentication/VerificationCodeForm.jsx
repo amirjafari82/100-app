@@ -7,9 +7,9 @@ import Button from "../../ui/Button";
 import CountDownTimer from "../../ui/CountDownTimer";
 import VerificationCodeInput from "../../ui/VerificationCodeInput";
 import { getRandomCode } from "../../utils/utils";
-import { useCode } from "./useCode";
 import { useLogin } from "./useLogin";
 import { useUser } from "./useUser";
+import Edit from "../../icons/Edit";
 
 const StyledForm = styled.form`
     display: flex;
@@ -50,24 +50,31 @@ const EditPhone = styled.div`
     font-weight: 600;
 `;
 
-function VerificationCodeForm() {
+const Error = styled.p`
+    margin-top: 12px;
+    color: #ff3f32;
+`;
+
+function VerificationCodeForm({ code, setCode }) {
     const { phone } = usePhone();
     const [userInput, setUserInput] = useState();
     const [isTimerFinished, setIsTimerFinished] = useState(false);
-    const { code, setCode } = useCode();
     const navigate = useNavigate();
-    console.log(code);
+    const [error, setError] = useState(null);
+    if (code) {
+        console.log(code);
+    }
 
     const { isLoading: isLoadingUser, isAuthenticated } = useUser();
 
     useEffect(
         function () {
-            if (isAuthenticated && !isLoadingUser) navigate("/account");
+            if (isAuthenticated && !isLoadingUser) navigate("/services");
         },
         [navigate, isAuthenticated, isLoadingUser]
     );
 
-    const { login, isLoading } = useLogin();
+    const { login, isPending } = useLogin();
 
     function handleResendCode(e) {
         e.preventDefault();
@@ -80,6 +87,8 @@ function VerificationCodeForm() {
         if (userInput === code) {
             const data = await login(phone);
             console.log(data);
+        } else {
+            setError("Code is incorrect!");
         }
     }
 
@@ -87,10 +96,16 @@ function VerificationCodeForm() {
         <StyledForm onSubmit={handleSubmit}>
             <StyledTopForm>
                 <EditPhone onClick={() => navigate(-1)}>
-                    <AiTwotoneEdit color="#0F1FD1" size="24" />
+                    <div>
+                        <Edit />
+                    </div>
                     <p>{phone}</p>
                 </EditPhone>
-                <VerificationCodeInput length={5} setUserInput={setUserInput} />
+                <VerificationCodeInput
+                    isError={!!error}
+                    length={5}
+                    setUserInput={setUserInput}
+                />
                 {isTimerFinished ? (
                     <ResendCodeButton onClick={handleResendCode}>
                         Resend Code
@@ -106,9 +121,10 @@ function VerificationCodeForm() {
                         />
                     </ValidityTimeSection>
                 )}
+                <Error>{error}</Error>
             </StyledTopForm>
-            <Button disabled={isLoading}>
-                {!isLoading ? "Enter" : "Logging in"}
+            <Button disabled={isPending}>
+                {!isPending ? "Enter" : "Logging in..."}
             </Button>
         </StyledForm>
     );
