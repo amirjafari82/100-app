@@ -7,6 +7,7 @@ import Onboarding from "./pages/Onboarding";
 import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Cards from "./pages/Cards";
+import Profile from "./pages/Profile";
 
 const queryClinet = new QueryClient({
     defaultOptions: {
@@ -22,7 +23,7 @@ function App() {
             <ReactQueryDevtools
                 initialIsOpen={false}
                 position="bottom"
-                buttonPosition="top-right"
+                buttonPosition="bottom-left"
             />
             <GlobalStyles />
             <BrowserRouter>
@@ -48,6 +49,14 @@ function App() {
                             </ProtectedRoute>
                         }
                         path="/cards"
+                    />
+                    <Route
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                        path="/profile"
                     />
                 </Routes>
             </BrowserRouter>

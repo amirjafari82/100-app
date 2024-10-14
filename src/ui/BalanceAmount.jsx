@@ -51,7 +51,7 @@ function BalanceAmount() {
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useUser();
     const ref = useRef();
-    const money = user.balance;
+    const money = user?.balance;
 
     function handleClick() {
         setIsOpen((open) => !open);
@@ -66,7 +66,7 @@ function BalanceAmount() {
                 { withCredentials: false }
             );
             const rate = res.data["usd_sell"].value;
-            const usd = (user.balance / rate).toFixed(2);
+            const usd = (user?.balance / rate).toFixed(2);
             setUsdRate(usd);
             setIsLoading(false);
         }

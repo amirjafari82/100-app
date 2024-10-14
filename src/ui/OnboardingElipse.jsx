@@ -47,7 +47,7 @@ const StyledCircleLarge = styled.div`
 `;
 
 function OnboardingElipse({ index }) {
-    const { isLoading: isLoadingUser, isAuthenticated } = useUser();
+    const { isPending: isLoadingUser, isAuthenticated } = useUser();
     const navigate = useNavigate();
 
     useEffect(

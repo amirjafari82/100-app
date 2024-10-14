@@ -26,13 +26,13 @@ function LoginForm({ code, setCode }) {
     const { phone, setPhone } = useLogin();
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const { isLoading, isAuthenticated } = useUser();
+    const { isPending, isAuthenticated } = useUser();
 
     useEffect(
         function () {
-            if (isAuthenticated && !isLoading) navigate("/services");
+            if (isAuthenticated && !isPending) navigate("/services");
         },
-        [navigate, isAuthenticated, isLoading]
+        [navigate, isAuthenticated, isPending]
     );
 
     function handleSubmit(e) {

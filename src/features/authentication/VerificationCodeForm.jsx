@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AiTwotoneEdit } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useLogin as usePhone } from "../../context/LoginContext";
@@ -10,6 +9,7 @@ import { getRandomCode } from "../../utils/utils";
 import { useLogin } from "./useLogin";
 import { useUser } from "./useUser";
 import Edit from "../../icons/Edit";
+import { ThreeDot } from "react-loading-indicators";
 
 const StyledForm = styled.form`
     display: flex;
@@ -65,7 +65,7 @@ function VerificationCodeForm({ code, setCode }) {
         console.log(code);
     }
 
-    const { isLoading: isLoadingUser, isAuthenticated } = useUser();
+    const { isPending: isLoadingUser, isAuthenticated } = useUser();
 
     useEffect(
         function () {
@@ -124,7 +124,16 @@ function VerificationCodeForm({ code, setCode }) {
                 <Error>{error}</Error>
             </StyledTopForm>
             <Button disabled={isPending}>
-                {!isPending ? "Enter" : "Logging in..."}
+                {!isPending ? (
+                    "Enter"
+                ) : (
+                    <ThreeDot
+                        color="#e0e0e0"
+                        size="small"
+                        text=""
+                        textColor=""
+                    />
+                )}
             </Button>
         </StyledForm>
     );

@@ -42,7 +42,7 @@ const Link = styled(NavLink)`
     &.active:visited {
         color: #0f1fd1;
     }
-    
+
     &:active path,
     &.active:link path,
     &.active:visited path {
