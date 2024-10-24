@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "../features/authentication/useUser";
+import toast from "react-hot-toast";
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate();
@@ -8,7 +9,9 @@ function ProtectedRoute({ children }) {
 
     useEffect(
         function () {
-            if (!isAuthenticated && !isPending) navigate("/login");
+            if (!isAuthenticated && !isPending) {
+                navigate("/login");
+            }
         },
         [navigate, isAuthenticated, isPending]
     );

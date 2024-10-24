@@ -8,6 +8,9 @@ import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Cards from "./pages/Cards";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import ProtectedScreen from "./ui/ProtectedScreen";
+import { Toaster } from "react-hot-toast";
 
 const queryClinet = new QueryClient({
     defaultOptions: {
@@ -28,16 +31,36 @@ function App() {
             <GlobalStyles />
             <BrowserRouter>
                 <Routes>
-                    <Route element={<Onboarding />} path="/" />
-                    <Route element={<Login page="welcome" />} path="/login" />
                     <Route
-                        element={<Login page="verification" />}
+                        element={
+                            <ProtectedScreen>
+                                <Onboarding />
+                            </ProtectedScreen>
+                        }
+                        path="/"
+                    />
+                    <Route
+                        element={
+                            <ProtectedScreen>
+                                <Login page="welcome" />
+                            </ProtectedScreen>
+                        }
+                        path="/login"
+                    />
+                    <Route
+                        element={
+                            <ProtectedScreen>
+                                <Login page="verification" />
+                            </ProtectedScreen>
+                        }
                         path="/login/verification"
                     />
                     <Route
                         element={
                             <ProtectedRoute>
-                                <Services />
+                                <ProtectedScreen>
+                                    <Services />
+                                </ProtectedScreen>
                             </ProtectedRoute>
                         }
                         path="/services"
@@ -45,7 +68,9 @@ function App() {
                     <Route
                         element={
                             <ProtectedRoute>
-                                <Cards />
+                                <ProtectedScreen>
+                                    <Cards />
+                                </ProtectedScreen>
                             </ProtectedRoute>
                         }
                         path="/cards"
@@ -53,13 +78,47 @@ function App() {
                     <Route
                         element={
                             <ProtectedRoute>
-                                <Profile />
+                                <ProtectedScreen>
+                                    <Profile />
+                                </ProtectedScreen>
                             </ProtectedRoute>
                         }
                         path="/profile"
                     />
+                    <Route
+                        path="/profile/edit"
+                        element={
+                            <ProtectedRoute>
+                                <ProtectedScreen>
+                                    <EditProfile />
+                                </ProtectedScreen>
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
+            <Toaster
+                position="top-center"
+                gutter={7.5}
+                containerStyle={{
+                    margin: "8px",
+                }}
+                toastOptions={{
+                    success: {
+                        duration: 3000,
+                    },
+                    error: {
+                        duration: 5000,
+                    },
+                    style: {
+                        fontSize: "12px",
+                        maxWidth: "300px",
+                        padding: "16px 24px",
+                        backgroundColor: "#ffffff",
+                        color: "#0F1FD1",
+                    },
+                }}
+            />
         </QueryClientProvider>
     );
 }

@@ -1,16 +1,15 @@
-function Check({ size = "24" }) {
+function CheckBoxIcon() {
     return (
         <svg
-            width={size}
-            height={size}
-            viewBox="0 0 24 24"
+            width="10"
+            height="8"
+            viewBox="0 0 10 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                d="M2 12.2267L8.34921 20L22 4"
+                d="M1 4.08502L3.53968 7L9 1"
                 stroke="#FDFEFF"
-                strokeWidth="1.7339"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
@@ -18,4 +17,4 @@ function Check({ size = "24" }) {
     );
 }
 
-export default Check;
+export default CheckBoxIcon;

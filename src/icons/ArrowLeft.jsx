@@ -1,16 +1,16 @@
-function Check({ size = "24" }) {
+function ArrowLeft() {
     return (
         <svg
-            width={size}
-            height={size}
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                d="M2 12.2267L8.34921 20L22 4"
-                stroke="#FDFEFF"
-                strokeWidth="1.7339"
+                d="M15.5 19L8.5 12L15.5 5"
+                stroke="#060607"
+                strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
@@ -18,4 +18,4 @@ function Check({ size = "24" }) {
     );
 }
 
-export default Check;
+export default ArrowLeft;
