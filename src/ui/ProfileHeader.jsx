@@ -18,6 +18,13 @@ const ImageContainer = styled.div`
     align-items: center;
 `;
 
+const UserImage = styled.img`
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
+`;
+
 const UserContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -34,18 +41,26 @@ const Welcome = styled.span`
     color: #929299;
 `;
 
-function ProfileHeader() {
+function ProfileHeader({ onlyImage }) {
     const { user } = useUser();
 
     return (
         <Container>
             <ImageContainer>
-                <User />
+                {user?.user.image ? (
+                    <UserImage
+                        src={`http://127.0.0.1:8000${user?.user.image}`}
+                    />
+                ) : (
+                    <User />
+                )}
             </ImageContainer>
-            <UserContainer>
-                <Username>Hi {user.user.first_name}!</Username>
-                <Welcome>Good to See You!</Welcome>
-            </UserContainer>
+            {!onlyImage && (
+                <UserContainer>
+                    <Username>Hi {user.user.first_name}!</Username>
+                    <Welcome>Good to See You!</Welcome>
+                </UserContainer>
+            )}
         </Container>
     );
 }

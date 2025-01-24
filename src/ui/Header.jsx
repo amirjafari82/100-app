@@ -1,28 +1,38 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ProfileHeader from "./ProfileHeader";
-import Notification from "../icons/Notification";
 import Logo from "../icons/Logo";
 
 const Container = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    ${(props) => props.padding && css`
+        padding: 0 16px;
+    `}
 `;
 
 const Main = styled.div`
     display: flex;
-    gap: 80px;
+    width: 50%;
     align-items: center;
+    justify-content: space-between;
 `;
 
-function Header() {
+const Icons = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 16px;
+`;
+
+function Header({ onlyImage, icons, padding }) {
     return (
-        <Container>
+        <Container padding={padding}>
             <Main>
-                <ProfileHeader />
+                <ProfileHeader onlyImage={onlyImage} />
                 <Logo />
             </Main>
-            <Notification />
+            <Icons>{icons.map((icon) => icon)}</Icons>
         </Container>
     );
 }

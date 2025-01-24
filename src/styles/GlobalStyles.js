@@ -33,6 +33,28 @@ const GlobalStyles = createGlobalStyle`
     .edit-profile-checkbox input ~ .checkmark {
         background-color: transparent;
     }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 12px;
+        color: #FDFEFF;
+
+  /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+    }
+
+    .swiper-wrapper {
+        align-items: baseline;
+    }
+
 `;
 
 export default GlobalStyles;

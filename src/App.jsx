@@ -11,6 +11,8 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import ProtectedScreen from "./ui/ProtectedScreen";
 import { Toaster } from "react-hot-toast";
+import Transaction from "./pages/Transaction";
+import AllTransactions from "./pages/AllTransactions";
 
 const queryClinet = new QueryClient({
     defaultOptions: {
@@ -26,7 +28,7 @@ function App() {
             <ReactQueryDevtools
                 initialIsOpen={false}
                 position="bottom"
-                buttonPosition="bottom-left"
+                buttonPosition="top-left"
             />
             <GlobalStyles />
             <BrowserRouter>
@@ -91,6 +93,26 @@ function App() {
                             <ProtectedRoute>
                                 <ProtectedScreen>
                                     <EditProfile />
+                                </ProtectedScreen>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/transaction"
+                        element={
+                            <ProtectedRoute>
+                                <ProtectedScreen>
+                                    <Transaction />
+                                </ProtectedScreen>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/transaction/all"
+                        element={
+                            <ProtectedRoute>
+                                <ProtectedScreen>
+                                    <AllTransactions />
                                 </ProtectedScreen>
                             </ProtectedRoute>
                         }

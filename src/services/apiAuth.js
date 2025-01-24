@@ -1,4 +1,5 @@
 import axios from "axios";
+import { format } from "date-fns";
 
 const BASE_URL = "http://127.0.0.1:8000/";
 
@@ -6,6 +7,7 @@ const LOGIN_URL = `${BASE_URL}accounts/token/`;
 const LOGOUT_URL = `${BASE_URL}accounts/logout/`;
 const AUTHENTICATED_URL = `${BASE_URL}accounts/authenticated/`;
 const UPDATEPROFILE_URL = `${BASE_URL}accounts/update-profile/`;
+const GET_USER = `${BASE_URL}accounts/get-user/`;
 
 axios.defaults.withCredentials = true;
 
@@ -46,6 +48,18 @@ export async function updateProfile(data) {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+export async function getUser(id) {
+    try {
+        const response = await axios.post(GET_USER, {
+            id: id,
         });
         return response.data;
     } catch (error) {

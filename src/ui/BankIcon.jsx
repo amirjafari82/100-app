@@ -14,7 +14,6 @@ import Sepah from "../icons/banks/Sepah";
 import Shahr from "../icons/banks/Shahr";
 import Sina from "../icons/banks/Saderat";
 import Tejarat from "../icons/banks/Saderat";
-import styled from "styled-components";
 import React from "react";
 
 function BankIcon({ bank, size }) {
