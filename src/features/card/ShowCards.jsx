@@ -48,6 +48,8 @@ function ShowCards() {
         setSearchParams(searchParams);
     }, []);
 
+    console.log(searchParams)
+
     const isMyCards = searchParams.get("cards") === "my-cards";
 
     return (
