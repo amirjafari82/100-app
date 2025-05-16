@@ -18,6 +18,7 @@ function TransactionOperations() {
         {
             name: "Balance",
             icon: <Balance2 />,
+            url: 'balance'
         },
         {
             name: "Transfer",

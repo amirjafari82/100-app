@@ -13,6 +13,7 @@ import ProtectedScreen from "./ui/ProtectedScreen";
 import { Toaster } from "react-hot-toast";
 import Transaction from "./pages/Transaction";
 import AllTransactions from "./pages/AllTransactions";
+import Balance from "./pages/Balance";
 
 const queryClinet = new QueryClient({
     defaultOptions: {
@@ -28,7 +29,7 @@ function App() {
             <ReactQueryDevtools
                 initialIsOpen={false}
                 position="bottom"
-                buttonPosition="top-left"
+                buttonPosition="bottom-left"
             />
             <GlobalStyles />
             <BrowserRouter>
@@ -113,6 +114,16 @@ function App() {
                             <ProtectedRoute>
                                 <ProtectedScreen>
                                     <AllTransactions />
+                                </ProtectedScreen>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/balance"
+                        element={
+                            <ProtectedRoute>
+                                <ProtectedScreen>
+                                    <Balance />
                                 </ProtectedScreen>
                             </ProtectedRoute>
                         }

@@ -13,6 +13,7 @@ const Container = styled.div`
     border-top: 2px solid #878fe8;
     border-radius: 12px;
     width: calc(100% - 32px);
+    max-height: 60px;
     padding: 16px;
     display: flex;
     justify-content: space-between;

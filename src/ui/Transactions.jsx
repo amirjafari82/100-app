@@ -14,6 +14,7 @@ const Container = styled.div`
     gap: 16px;
     margin-top: 16px;
     align-items: center;
+    margin-bottom: 48px;
 `;
 
 function Transactions({ ActiveCard }) {

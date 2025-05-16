@@ -3,7 +3,9 @@ import AllTransactionsHeader from "../ui/AllTransactionsHeader";
 import Transactions from "../ui/Transactions";
 
 const Container = styled.div`
-    padding: 24px 16px 0px 16px;
+    padding: 24px 16px 48px 16px;
+    height: 100vh;
+    overflow-y: scroll;
 `;
 
 function AllTransactions() {

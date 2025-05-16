@@ -1,3 +1,4 @@
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Item = styled.div`
@@ -22,8 +23,11 @@ const ItemName = styled.span`
 `;
 
 function OperationItem({ item }) {
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
+
     return (
-        <Item>
+        <Item onClick={() => navigate(`/${item.url}?card=${searchParams.get('card')}`)}>
             <Icon>{item.icon}</Icon>
             <ItemName>{item.name}</ItemName>
         </Item>
